@@ -27,7 +27,6 @@ def is_valid_src_ip(src_ip):
         return False
 
 def scapy_traceroute(dest, max_hops=30, pings_per_hop=3, timeout=2, packet_size=56, src_ip=None, delay=0, output_file=None):
-    # Error handling
     if not is_valid_ip(dest):
         print("Error: Invalid destination IP address.")
         return
@@ -68,7 +67,7 @@ def scapy_traceroute(dest, max_hops=30, pings_per_hop=3, timeout=2, packet_size=
             if reply:
                 hop_ips.append(reply.src)
                 rtts.append(round((end - start) * 1000, 2))
-                if reply.type == 0:  # Destination reached
+                if reply.type == 0:  
                     reached = True
                 else:
                     reached = False
@@ -77,7 +76,7 @@ def scapy_traceroute(dest, max_hops=30, pings_per_hop=3, timeout=2, packet_size=
                 hop_ips.append("*")
                 rtts.append(None)
             time.sleep(delay)
-            
+
         ip_set = set([ip for ip in hop_ips if ip != "*"])
         ip_str = ", ".join(ip_set) if ip_set else "*"
         avg_rtt = f"{sum([rtt for rtt in rtts if rtt is not None])/max(1, len([rtt for rtt in rtts if rtt is not None])):.2f}" if any(rtts) else "-"
