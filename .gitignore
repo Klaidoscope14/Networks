@@ -3,3 +3,4 @@ server
 *.o
 *.pdf
 Theory/
+.DS_Store
