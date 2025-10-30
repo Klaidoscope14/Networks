@@ -1,5 +1,5 @@
 def ip_to_int(ip: str) -> int:
-    """Convert dotted-decimal IPv4 string into 32-bit integer."""
+    """Converts dotted-decimal IPv4 string into 32-bit integer."""
     parts = list(map(int, ip.split('.')))
     result = 0
     for p in parts:
@@ -8,7 +8,7 @@ def ip_to_int(ip: str) -> int:
 
 
 def parse_cidr(cidr: str):
-    """Parse CIDR (e.g., 192.168.1.0/24) into (network_int, mask_length)."""
+    """Parses CIDR (e.g., 192.168.1.0/24) into (network_int, mask_length)."""
     ip, prefix_len = cidr.split('/')
     prefix_len = int(prefix_len)
     ip_int = ip_to_int(ip)
@@ -18,7 +18,7 @@ def parse_cidr(cidr: str):
 
 
 def find_best_route(dest_ip: str, routes: list):
-    """Find the best matching route for a given destination IP."""
+    """Finds the best matching route for a given destination IP."""
     dest_int = ip_to_int(dest_ip)
     best_match = None
     longest_prefix = -1
