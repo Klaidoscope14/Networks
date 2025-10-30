@@ -30,7 +30,6 @@ def find_best_route(dest_ip: str, routes: list):
                 longest_prefix = prefix_len
                 best_match = route["interface"]
 
-    # Default route if no match found
     return best_match if best_match else "No route"
 
 
