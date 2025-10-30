@@ -33,11 +33,9 @@ def cidr_info(cidr: str) -> dict:
     network_int = ip_int & mask
     broadcast_int = network_int | (~mask & 0xFFFFFFFF)
 
-    total_addresses = 1 << (32 - prefix)  # 2^(32-prefix)
-
-    # Usable hosts: conventional approach
+    total_addresses = 1 << (32 - prefix)  
+    
     if prefix == 31:
-        # /31 per RFC3021 uses both addresses for point-to-point links.
         usable_hosts = 0
         usable_range = "No usable host addresses ( /31 - point-to-point )"
     elif prefix == 32:
