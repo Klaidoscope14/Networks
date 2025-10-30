@@ -23,12 +23,6 @@ def _mask_from_prefix(prefix: int) -> int:
     return (0xFFFFFFFF << (32 - prefix)) & 0xFFFFFFFF
 
 def cidr_to_range(cidr: str) -> Tuple[int, int, int]:
-    """
-    Convert CIDR string (e.g. '192.168.1.0/24') into a tuple:
-      (network_start_int, network_end_int, prefix_length)
-    Example:
-      cidr_to_range("192.168.1.0/24") -> (3232235776, 3232236031, 24)
-    """
     if '/' not in cidr:
         raise ValueError("CIDR must contain '/'")
     ip_part, prefix_part = cidr.split('/', 1)
