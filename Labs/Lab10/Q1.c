@@ -1,7 +1,3 @@
-// dv_multithread.c
-// Distance Vector routing with one thread per router.
-// Reads topology.txt from current directory.
-
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
