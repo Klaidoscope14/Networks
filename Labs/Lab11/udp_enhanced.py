@@ -8,7 +8,6 @@ ENC = 'utf-8'
 TIMEOUT_SECONDS = 3
 BUFFER = 4096
 
-
 def run_server():
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.bind((HOST, PORT))
