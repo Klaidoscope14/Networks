@@ -46,7 +46,6 @@ def run_server():
                     break
         print("[TCP Server] Server stopped.")
 
-
 def run_client():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
