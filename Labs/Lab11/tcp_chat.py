@@ -83,7 +83,6 @@ def run_client():
                 print("[TCP Client] Exiting.")
                 break
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2 or sys.argv[1] not in ("server", "client"):
         print("Usage: python tcp_chat.py [server|client]")
