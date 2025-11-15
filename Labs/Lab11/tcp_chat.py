@@ -6,14 +6,16 @@ PORT = 5050
 BUFFER = 4096
 ENC = 'utf-8'
 
-
 def run_server():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((HOST, PORT))
         s.listen(1)
+
         print(f"[TCP Server] Listening on {HOST}:{PORT}...")
         conn, addr = s.accept()
+
         with conn:
             print(f"[TCP Server] Connected by {addr}")
             while True:
@@ -26,6 +28,7 @@ def run_server():
                     print("[TCP Server] No data received. Closing.")
                     break
                 msg = data.decode(ENC).strip()
+
                 print(f"[TCP Server] Received from {addr}: {msg}")
                 if msg.lower() == "exit":
                     print("[TCP Server] 'exit' received. Closing connection.")
@@ -35,6 +38,7 @@ def run_server():
                         pass
                     break
                 reply = f"Server Received: {msg}"
+
                 try:
                     conn.sendall(reply.encode(ENC))
                 except BrokenPipeError:
@@ -51,6 +55,7 @@ def run_client():
             print(f"[TCP Client] Could not connect to {HOST}:{PORT}. Is the server running?")
             return
         print(f"[TCP Client] Connected to {HOST}:{PORT}. Type messages. Type 'exit' to quit.")
+        
         while True:
             try:
                 msg = input()
