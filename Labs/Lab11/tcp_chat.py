@@ -1,22 +1,3 @@
-#!/usr/bin/env python3
-"""
-tcp_chat.py
-
-Usage:
-    python tcp_chat.py server
-    python tcp_chat.py client
-
-Server:
- - listens on 127.0.0.1:5050
- - accepts one client
- - for each message received prints it and replies "Server Received: <message>"
- - if message == "exit" server closes connection
-
-Client:
- - connects to 127.0.0.1:5050
- - reads user input repeatedly, sends it to server, prints server response
- - typing "exit" closes the client
-"""
 import socket
 import sys
 
@@ -48,7 +29,6 @@ def run_server():
                 print(f"[TCP Server] Received from {addr}: {msg}")
                 if msg.lower() == "exit":
                     print("[TCP Server] 'exit' received. Closing connection.")
-                    # Optionally inform client
                     try:
                         conn.sendall("Server Received: exit".encode(ENC))
                     except Exception:
@@ -75,7 +55,6 @@ def run_client():
             try:
                 msg = input()
             except EOFError:
-                # handle Ctrl-D
                 msg = "exit"
                 print()
             if not msg:
@@ -85,7 +64,6 @@ def run_client():
             except BrokenPipeError:
                 print("[TCP Client] Broken pipe. Server may have closed connection.")
                 break
-            # receive server response
             try:
                 data = s.recv(BUFFER)
             except ConnectionResetError:

@@ -1,23 +1,3 @@
-#!/usr/bin/env python3
-"""
-udp_enhanced.py
-
-Usage:
-    python udp_enhanced.py server
-    python udp_enhanced.py client
-
-Server:
- - listens on 127.0.0.1:6060
- - for every datagram prints the data and address
- - replies with "ACK <HH:MM:SS>"
- - if receives "exit" from a client, stops the server
-
-Client:
- - sends datagrams to 127.0.0.1:6060
- - waits up to 3 seconds for an ACK
- - on timeout prints "Packet lost (timeout)"
- - typing "exit" will send exit then stop the client
-"""
 import socket
 import sys
 from datetime import datetime
@@ -41,7 +21,6 @@ def run_server():
                 break
             msg = data.decode(ENC).strip()
             print(f"[UDP Server] Received from {addr}: {msg}")
-            # prepare ACK
             now = datetime.now().strftime("%H:%M:%S")
             ack = f"ACK {now}"
             try:
@@ -72,7 +51,6 @@ def run_client():
                 print(f"[UDP Client] Send error: {e}")
                 continue
 
-            # wait for ACK with timeout
             s.settimeout(TIMEOUT_SECONDS)
             try:
                 data, addr = s.recvfrom(BUFFER)
@@ -83,7 +61,7 @@ def run_client():
             else:
                 print(data.decode(ENC).strip())
             finally:
-                s.settimeout(None)  # remove timeout
+                s.settimeout(None)  
 
             if msg.lower() == "exit":
                 print("[UDP Client] Exiting.")
