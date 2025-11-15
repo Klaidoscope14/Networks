@@ -55,7 +55,7 @@ def run_client():
             print(f"[TCP Client] Could not connect to {HOST}:{PORT}. Is the server running?")
             return
         print(f"[TCP Client] Connected to {HOST}:{PORT}. Type messages. Type 'exit' to quit.")
-        
+
         while True:
             try:
                 msg = input()
